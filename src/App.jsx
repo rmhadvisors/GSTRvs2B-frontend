@@ -18,6 +18,9 @@ export default function App() {
   const [errorMsg, setErrorMsg] = useState("");
   const [downloadUrl, setDownloadUrl] = useState(null);
 
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
+
+
   const canReconcile = gstrFile && booksFile && status !== "processing";
 
   const handleReconcile = async () => {
@@ -35,7 +38,7 @@ export default function App() {
       formData.append("gstr_file", gstrFile);
       formData.append("books_file", booksFile);
 
-      const response = await fetch("/api/reconcile", {
+      const response = await fetch(`${API_BASE_URL}/api/reconcile`, {
         method: "POST",
         body: formData,
       });
